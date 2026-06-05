@@ -16,20 +16,50 @@ jobs:
         uses: actions/checkout@v4
       - name: Notify Teams
         if: always()
+        env:
+          STATUS: ${{ job.status }}
         run: |
-          STATUS="${{ job.status }}"
-      
           curl -X POST \
             -H "Content-Type: application/json" \
-            -d'{
-                "type":"AdaptiveCard",
-                "$schema":"http://adaptivecards.io/schemas/adaptive-card.json",
-                "version":"1.4",
-                "body":[
-                  {
-                    "type":"TextBlock",
-                    "text":"✅ Deploy Success"
-                  }
-                ]
-              }' \
+            -d "{
+              \"type\":\"AdaptiveCard\",
+              \"\$schema\":\"http://adaptivecards.io/schemas/adaptive-card.json\",
+              \"version\":\"1.4\",
+              \"body\":[
+                {
+                  \"type\":\"TextBlock\",
+                  \"size\":\"Large\",
+                  \"weight\":\"Bolder\",
+                  \"text\":\"🚀 Deployment ${STATUS}\"
+                },
+                {
+                  \"type\":\"FactSet\",
+                  \"facts\":[
+                    {
+                      \"title\":\"Repository\",
+                      \"value\":\"${{ github.repository }}\"
+                    },
+                    {
+                      \"title\":\"Branch\",
+                      \"value\":\"${{ github.ref_name }}\"
+                    },
+                    {
+                      \"title\":\"Actor\",
+                      \"value\":\"${{ github.actor }}\"
+                    },
+                    {
+                      \"title\":\"Commit\",
+                      \"value\":\"${{ github.sha }}\"
+                    }
+                  ]
+                }
+              ],
+              \"actions\":[
+                {
+                  \"type\":\"Action.OpenUrl\",
+                  \"title\":\"View Workflow Run\",
+                  \"url\":\"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
+                }
+              ]
+            }" \
             "https://defaulta2fe65c9824a4e1091da92654b5038.14.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/868ab1a7f34947209c4b7fd4aad96bba/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aapaNVRorn7qdgndHmhp8yVzNX4iMmuAE6rpFqnL7MU"
