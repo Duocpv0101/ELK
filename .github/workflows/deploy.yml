@@ -55,8 +55,8 @@ jobs:
                       \"value\":\"${{ github.sha }}\"
                     },
                     {
-                      \"title\":\"Job\",
-                      \"value\":\"${{ github.job }}\"
+                      \"title\":\"Name\",
+                      \"value\":\"${{ github.workflow }}\"
                     }
                   ]
                 }
