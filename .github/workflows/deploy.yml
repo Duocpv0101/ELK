@@ -21,7 +21,15 @@ jobs:
       
           curl -X POST \
             -H "Content-Type: application/json" \
-            -d "{
-              \"message\":\"Workflow ${STATUS} - Repo: ${{ github.repository }} - Branch: ${{ github.ref_name }}\"
-            }" \
+            -d'{
+                "type":"AdaptiveCard",
+                "$schema":"http://adaptivecards.io/schemas/adaptive-card.json",
+                "version":"1.4",
+                "body":[
+                  {
+                    "type":"TextBlock",
+                    "text":"✅ Deploy Success"
+                  }
+                ]
+              }' \
             "https://defaulta2fe65c9824a4e1091da92654b5038.14.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/868ab1a7f34947209c4b7fd4aad96bba/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aapaNVRorn7qdgndHmhp8yVzNX4iMmuAE6rpFqnL7MU"
