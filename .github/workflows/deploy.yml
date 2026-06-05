@@ -14,6 +14,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Record Start Time
+        run: |
+          echo "START_TIME=$(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_ENV
+          
       - name: Test fail
         run: |
           pnpm install
@@ -22,6 +26,7 @@ jobs:
         env:
           STATUS: ${{ job.status }}
         run: |
+          FINISH_TIME=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
           curl -X POST \
             -H "Content-Type: application/json" \
             -d "{
