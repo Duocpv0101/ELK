@@ -57,6 +57,14 @@ jobs:
                     {
                       \"title\":\"Name\",
                       \"value\":\"${{ github.workflow }}\"
+                    },
+                    {
+                      \"title\":\"Started At\",
+                      \"value\":\"${START_TIME}\"
+                    },
+                    {
+                      \"title\":\"Finished At\",
+                      \"value\":\"${FINISH_TIME}\"
                     }
                   ]
                 }
