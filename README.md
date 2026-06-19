@@ -1,4 +1,4 @@
-# Note: 
+# Note DuocPV: 
 *Dữ liệu được các Beats (shipper) thu thập và gửi về cho Logstash; Logstash tiếp nhận và phân tích dữ liệu. Sau đó dữ liệu được gửi vào Elasticsearch; Elasticsearch nhận dữ liệu từ Logstash và lưu trữ, đánh chỉ mục; Kibana sử dụng các dữ liệu trong Elasticsearch để hiển thị và phân tích cú pháp tìm kiếm mà người dùng nhập vào để gửi cho Elasticsearch tìm kiếm.*
 ![Elastic Stack](https://japan-itworks.vn/storage/media/tinymce/blog/1615798267-1615798267-640.png)
 - Packetbeat : lấy / gửi các gói tin mạng
